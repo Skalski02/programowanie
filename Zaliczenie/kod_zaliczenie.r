@@ -37,12 +37,13 @@ Snieg2 <- Snieg |>
     values_to = "wartosc_cm"
   )
 
-ggplot2::ggplot(Snieg2, aes(miesiac, wartosc_cm, color = nazwa,)) +
+ggplot2::ggplot(Snieg2, aes(miesiac, wartosc_cm, color = nazwa, )) +
   geom_point()
 
-Snieg <- dplyr::summarise(Snieg,
-    dplyr::across(starts_with("snieg"), list(suma = \(x) sum(x, na.rm = TRUE)))
-  ) |>
+Snieg <- dplyr::summarise(
+  Snieg,
+  dplyr::across(starts_with("snieg"), list(suma = \(x) sum(x, na.rm = TRUE)))
+) |>
   dplyr::rename(
     Kielce_suma_opadu_cm = sniegcmK_suma,
     Szczecin_suma_opadu_cm = sniegcmS_suma,
